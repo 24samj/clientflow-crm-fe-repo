@@ -1,5 +1,5 @@
 import { getTicketCount } from "../utils/utils.js";
-import StatusCard from "./StatusCard.jsx";
+import StatusCard from "../Component/StatusCard.jsx";
 
 const StatusRow = ({ ticketList }) => {
     return (
