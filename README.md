@@ -14,14 +14,26 @@ ClientFlow CRM is a 3-tier application designed for efficient ticket and issue m
 
 ## Technologies Used
 
-### • **JavaScript (JS):** The primary programming language used for implementing the application's logic.
+### • **JavaScript (JS):**
 
-### • **React:** The frontend is developed using React, providing a dynamic and user-friendly interface for seamless interaction.
+The primary programming language used for implementing the application's logic.
 
-### • **Node.js with Express:** Express is employed to build the backend APIs, and Node.js powers the server-side of the application.
+### • **React:**
 
-### • **MongoDB:** MongoDB serves as the database management system, ensuring scalable and efficient storage for the application's data.
+The frontend is developed using React, providing a dynamic and user-friendly interface for seamless interaction.
 
-### • **Authentication and Authorization:** Robust AuthN and AuthZ mechanisms are implemented to ensure secure access for users based on their roles.
+### • **Node.js with Express:**
 
-### • **CSS:** Cascading Style Sheets are utilized for styling and layout, enhancing the visual appeal and usability of the application.
+Express is employed to build the backend APIs, and Node.js powers the server-side of the application.
+
+### • **MongoDB:**
+
+MongoDB serves as the database management system, ensuring scalable and efficient storage for the application's data.
+
+### • **Authentication and Authorization:**
+
+Robust AuthN and AuthZ mechanisms are implemented to ensure secure access for users based on their roles.
+
+### • **CSS:**
+
+Cascading Style Sheets are utilized for styling and layout, enhancing the visual appeal and usability of the application.
