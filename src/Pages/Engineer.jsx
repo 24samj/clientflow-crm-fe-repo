@@ -8,11 +8,11 @@ import Sidebar from "../Component/SideBar.jsx";
 //import StatusCard from "../Component/StatusCard";
 
 // import { useNavigate } from "react-router-dom";
-import Loader from "../Component/loder.jsx";
-import StatusRow from "../Component/statusRow.jsx";
+import Loader from "../Component/Loader.jsx";
+import StatusRow from "../Component/StatusRow.jsx";
 import useTickets from "../hooks/useTickets.jsx";
 import useAuth from "../hooks/useAuth.jsx";
-import WelcomeMsg from "../Component/Welcomemsg.jsx";
+import WelcomeMsg from "../Component/WelcomeMsg.jsx";
 import UpdateTicketModal from "../Component/UpdateTicketModal.jsx";
 
 const Enginner = () => {

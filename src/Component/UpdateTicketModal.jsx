@@ -1,4 +1,4 @@
-import { BASE_URL } from "../Constans";
+import { BASE_URL } from "../Constants";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { Modal, Button, ModalBody, ModalFooter } from "react-bootstrap";

@@ -5,12 +5,12 @@ import MaterialTable from "@material-table/core";
 
 import { Button, Form, Modal, ModalBody, ModalFooter } from "react-bootstrap";
 import Sidebar from "../Component/SideBar.jsx";
-import Loader from "../Component/loder.jsx";
-import { BASE_URL } from "../Constans.js";
-import StatusRow from "../Component/statusRow.jsx";
+import Loader from "../Component/Loader.jsx";
+import { BASE_URL } from "../Constants.js";
+import StatusRow from "../Component/StatusRow.jsx";
 import useAuth from "../hooks/useAuth.jsx";
 import { toast } from "react-toastify";
-import WelcomeMsg from "../Component/Welcomemsg.jsx";
+import WelcomeMsg from "../Component/WelcomeMsg.jsx";
 
 const Admin = () => {
     const [userList, SetusersList] = useState([]);

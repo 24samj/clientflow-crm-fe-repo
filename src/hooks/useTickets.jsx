@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { BASE_URL } from "../Constans.js";
+import { BASE_URL } from "../Constants.js";
 
 export default function useTickets() {
     const [ticketList, setTicketList] = useState([]);

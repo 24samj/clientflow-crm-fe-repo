@@ -9,19 +9,19 @@ import {
     ModalHeader,
     ModalTitle,
 } from "react-bootstrap";
-import { BASE_URL } from "../Constans.js";
+import { BASE_URL } from "../Constants.js";
 import Sidebar from "../Component/SideBar.jsx";
 //import StatusCard from "../components/StatusCard.jsx";
 //import Loader from "../components/Loader";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 //import StatusCard from "../Component/StatusCard";
-import Loader from "../Component/loder.jsx";
-import StatusRow from "../Component/statusRow.jsx";
+import Loader from "../Component/Loader.jsx";
+import StatusRow from "../Component/StatusRow.jsx";
 import UpdateTicketDetail from "../Component/UpdateTicketModal.jsx";
 import useTickets from "../hooks/useTickets.jsx";
 import useAuth from "../hooks/useAuth.jsx";
-import WelcomeMsg from "../Component/Welcomemsg.jsx";
+import WelcomeMsg from "../Component/WelcomeMsg.jsx";
 
 const Customer = () => {
     const [showCreateTicketModal, setShowCreateTicketModal] = useState(false);

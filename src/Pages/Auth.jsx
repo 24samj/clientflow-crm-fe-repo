@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { BASE_URL } from "../Constans.js";
+import { BASE_URL } from "../Constants.js";
 const Auth = () => {
     const [showSignUP, setSignUp] = useState(false);
     const [errorMessage, seterrorMessage] = useState("");
@@ -130,7 +130,7 @@ const Auth = () => {
                                             <input
                                                 type="text"
                                                 name="userId"
-                                                placeholder="enter your user id "
+                                                placeholder="Enter your user id"
                                                 className="form-control"
                                                 value={LoginFormValues.userId}
                                                 onChange={handleLoginFromChange}
@@ -141,7 +141,7 @@ const Auth = () => {
                                             <input
                                                 type="password"
                                                 name="password"
-                                                placeholder="enter your password "
+                                                placeholder="Enter your password"
                                                 className="form-control"
                                                 onChange={handleLoginFromChange}
                                                 value={LoginFormValues.password}
@@ -156,9 +156,10 @@ const Auth = () => {
                                             />
                                         </div>
                                         <div
-                                            className="signup-btn text-right "
+                                            className="signup-btn text-right"
+                                            style={{ cursor: "pointer" }}
                                             onClick={toggleSignUp}>
-                                            dont have an account? SignUp
+                                            Don't have an account? SignUp
                                         </div>
                                     </form>
                                 </div>
@@ -170,7 +171,7 @@ const Auth = () => {
                                             <input
                                                 type="text"
                                                 name="userId"
-                                                placeholder="enter your user id "
+                                                placeholder="Enter a user id"
                                                 className="form-control"
                                                 onChange={
                                                     handleSignUpFormChange
@@ -183,7 +184,7 @@ const Auth = () => {
                                             <input
                                                 type="username"
                                                 name="Username"
-                                                placeholder="enter your username"
+                                                placeholder="Enter a username"
                                                 className="form-control"
                                                 onChange={
                                                     handleSignUpFormChange
@@ -200,7 +201,7 @@ const Auth = () => {
                                                 value={
                                                     SignUpFormValues.userTypes
                                                 }
-                                                name="userType"
+                                                name="userTypes"
                                                 onChange={
                                                     handleSignUpFormChange
                                                 }>
@@ -224,7 +225,7 @@ const Auth = () => {
                                                 onChange={
                                                     handleSignUpFormChange
                                                 }
-                                                placeholder="enter your email"
+                                                placeholder="Enter an email"
                                             />
                                         </div>
                                         <div className="input-group m-1">
@@ -235,7 +236,7 @@ const Auth = () => {
                                                 value={
                                                     SignUpFormValues.password
                                                 }
-                                                placeholder="enter your password"
+                                                placeholder="Enter a password"
                                                 onChange={
                                                     handleSignUpFormChange
                                                 }
@@ -251,9 +252,10 @@ const Auth = () => {
                                         </div>
 
                                         <div
-                                            className="signup-btn text-right "
+                                            className="signup-btn text-right"
+                                            style={{ cursor: "pointer" }}
                                             onClick={toggleSignUp}>
-                                            Already have an account?Login
+                                            Already have an account? Login
                                         </div>
                                     </form>
                                 </div>
