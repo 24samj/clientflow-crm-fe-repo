@@ -6,11 +6,19 @@ ClientFlow CRM is a 3-tier application designed for efficient ticket and issue m
 
 ## Key features:
 
-### • Three user roles: Admins (system oversight), Engineers (manage and resolve tickets and issues), and Customers (raise and manage raised tickets).
+### • Diverse User Roles:
 
-### • Ensures secure access with AuthN and AuthZ.
+Admins (system oversight)
+Engineers (manage and resolve tickets and issues)
+Customers (raise and manage raised tickets).
 
-### • Backed by MongoDB for the database, with Express handling APIs, and a user-friendly React frontend.
+### • Secure Access:
+
+Ensures secure access with AuthN and AuthZ.
+
+### • Data Management and UI:
+
+Backed by MongoDB for the database, with Express handling APIs, and a user-friendly React frontend.
 
 ## Technologies Used
 
@@ -29,10 +37,6 @@ Express is employed to build the backend APIs, and Node.js powers the server-sid
 ### • **MongoDB:**
 
 MongoDB serves as the database management system, ensuring scalable and efficient storage for the application's data.
-
-### • **Authentication and Authorization:**
-
-Robust AuthN and AuthZ mechanisms are implemented to ensure secure access for users based on their roles.
 
 ### • **CSS:**
 
