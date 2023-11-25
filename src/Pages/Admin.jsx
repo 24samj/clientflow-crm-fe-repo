@@ -13,9 +13,9 @@ import { toast } from "react-toastify";
 import WelcomeMsg from "../Component/WelcomeMsg.jsx";
 
 const Admin = () => {
-    const [userList, SetusersList] = useState([]);
+    const [userList, setUsersList] = useState([]);
     const [isUserListLoading, setIsUserslistLoading] = useState(false);
-    const [showUserModal, SetshowUserModal] = useState(false);
+    const [showUserModal, setShowUserModal] = useState(false);
     const [userDetail, setUserDetail] = useState({});
     const [ticketList, setTicketList] = useState([]);
     useAuth();
@@ -24,7 +24,7 @@ const Admin = () => {
         try {
             setIsUserslistLoading(true);
             const { data } = await axios.get(BASE_URL + "/crm/api/v1/users/");
-            SetusersList(data);
+            setUsersList(data);
         } catch (ex) {
             toast.error("Error occured while fetching the list of users.");
         } finally {
@@ -37,6 +37,7 @@ const Admin = () => {
             const { data } = await axios.get(
                 `${BASE_URL}/crm/api/v1/tickets/all`
             );
+            console.log(data);
             setTicketList(data);
         } catch (ex) {
             toast.error("Error occured while fetching the ticket counts.");
@@ -56,14 +57,15 @@ const Admin = () => {
                     email: userDetail.email,
                 }
             );
+
             toast.success("User detail updated successfully");
 
-            SetusersList(
+            setUsersList(
                 userList.map((user) =>
                     user.userId === userDetail.userId ? userDetail : user
                 )
             );
-            SetshowUserModal(false);
+            setShowUserModal(false);
         } catch (ex) {
             toast.error(
                 "Error occured while updating user details. Please try again in a minute."
@@ -72,7 +74,7 @@ const Admin = () => {
     };
 
     const handdleRowClick = (event, rowData) => {
-        SetshowUserModal(true);
+        setShowUserModal(true);
         setUserDetail({
             name: rowData.name,
             userId: rowData.userId,
@@ -138,7 +140,7 @@ const Admin = () => {
             </div>
             <Modal
                 show={showUserModal}
-                onHide={() => SetshowUserModal(false)}
+                onHide={() => setShowUserModal(false)}
                 centered
                 backdrop="static"
                 keyboard>
@@ -201,7 +203,7 @@ const Admin = () => {
                 <ModalFooter>
                     <Button
                         variant="secondary"
-                        onClick={() => SetshowUserModal(false)}>
+                        onClick={() => setShowUserModal(false)}>
                         Close
                     </Button>
                     <Button variant="primary" onClick={updateUserDetail}>

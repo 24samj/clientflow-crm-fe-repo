@@ -1,10 +1,12 @@
 import { CNavItem, CNavTitle, CSidebar, CSidebarNav } from "@coreui/react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Sidebar = () => {
     const navigate = useNavigate();
     const logout = () => {
         localStorage.clear();
+        toast.success("Logged out successfully.");
         navigate("/");
     };
     return (

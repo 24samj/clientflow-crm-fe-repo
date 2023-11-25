@@ -46,7 +46,6 @@ const Auth = () => {
             localStorage.setItem("userStatus", data.userStatus);
             localStorage.setItem("token", data.accessToken);
 
-            toast.success("Welcome to the app!");
             switch (data.userTypes) {
                 case "CUSTOMER":
                     navigate("/customer");
@@ -59,7 +58,7 @@ const Auth = () => {
                     break;
                 default:
             }
-            toast.success("Login Successfull");
+            toast.success("Logged in successfully!");
         } catch (ex) {
             toast.error(ex.response.data.message);
             seterrorMessage(ex.response.data.message);
@@ -124,9 +123,11 @@ const Auth = () => {
                         <div className="col">
                             {!showSignUP ? (
                                 <div>
-                                    <h4 className="text-center">Login</h4>
+                                    <h4 className="text-center">
+                                        Login to ClientFlow
+                                    </h4>
                                     <form onSubmit={handleLogin}>
-                                        <div className="input-group m-1">
+                                        <div className="input-group m-1 mt-4">
                                             <input
                                                 type="text"
                                                 name="userId"
@@ -137,7 +138,7 @@ const Auth = () => {
                                                 required
                                             />
                                         </div>
-                                        <div className="input-group m-1">
+                                        <div className="input-group m-1 mt-2">
                                             <input
                                                 type="password"
                                                 name="password"
@@ -148,7 +149,7 @@ const Auth = () => {
                                                 required
                                             />
                                         </div>
-                                        <div className="input-group m-1">
+                                        <div className="input-group m-1 mt-2">
                                             <input
                                                 type="submit"
                                                 className="form-control btn btn-primary"
@@ -157,7 +158,18 @@ const Auth = () => {
                                         </div>
                                         <div
                                             className="signup-btn text-right"
-                                            style={{ cursor: "pointer" }}
+                                            style={{
+                                                cursor: "pointer",
+                                                textDecoration: "none",
+                                            }}
+                                            onMouseEnter={(event) =>
+                                                (event.target.style.textDecoration =
+                                                    "underline")
+                                            }
+                                            onMouseLeave={(event) =>
+                                                (event.target.style.textDecoration =
+                                                    "none")
+                                            }
                                             onClick={toggleSignUp}>
                                             Don't have an account? SignUp
                                         </div>
@@ -165,9 +177,11 @@ const Auth = () => {
                                 </div>
                             ) : (
                                 <div>
-                                    <h4 className="text-center">Sign-up</h4>
+                                    <h4 className="text-center">
+                                        Sign-up for ClientFlow
+                                    </h4>
                                     <form onSubmit={handleSignUp}>
-                                        <div className="input-group m-1">
+                                        <div className="input-group m-1 mt-4">
                                             <input
                                                 type="text"
                                                 name="userId"
@@ -180,7 +194,7 @@ const Auth = () => {
                                                 required
                                             />
                                         </div>
-                                        <div className="input-group m-1">
+                                        <div className="input-group m-1 mt-2">
                                             <input
                                                 type="username"
                                                 name="Username"
@@ -195,7 +209,7 @@ const Auth = () => {
                                                 required
                                             />
                                         </div>
-                                        <div className="input-group m-1">
+                                        <div className="input-group m-1 mt-2">
                                             <Form.Select
                                                 aria-label="user Type selection"
                                                 value={
@@ -216,7 +230,7 @@ const Auth = () => {
                                                 </option>
                                             </Form.Select>
                                         </div>
-                                        <div className="input-group m-1">
+                                        <div className="input-group m-1 mt-2">
                                             <input
                                                 type="email"
                                                 name="email"
@@ -228,7 +242,7 @@ const Auth = () => {
                                                 placeholder="Enter an email"
                                             />
                                         </div>
-                                        <div className="input-group m-1">
+                                        <div className="input-group m-1 mt-2">
                                             <input
                                                 type="password"
                                                 name="password"
@@ -243,7 +257,7 @@ const Auth = () => {
                                                 required
                                             />
                                         </div>
-                                        <div className="input-group m-2 width-100px">
+                                        <div className="input-group m-2 mt-2 width-100px">
                                             <input
                                                 type="submit"
                                                 className="form-control btn btn-primary"
@@ -253,7 +267,18 @@ const Auth = () => {
 
                                         <div
                                             className="signup-btn text-right"
-                                            style={{ cursor: "pointer" }}
+                                            style={{
+                                                cursor: "pointer",
+                                                textDecoration: "none",
+                                            }}
+                                            onMouseEnter={(event) =>
+                                                (event.target.style.textDecoration =
+                                                    "underline")
+                                            }
+                                            onMouseLeave={(event) =>
+                                                (event.target.style.textDecoration =
+                                                    "none")
+                                            }
                                             onClick={toggleSignUp}>
                                             Already have an account? Login
                                         </div>
