@@ -149,7 +149,7 @@ const Customer = () => {
                                     actions={[
                                         {
                                             icon: () => (
-                                                <i class="bi bi-plus-circle"></i>
+                                                <i className="bi bi-plus-circle"></i>
                                             ),
                                             tooltip: "Create a new ticket",
                                             isFreeAction: true,

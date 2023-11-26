@@ -1,16 +1,20 @@
+import "react-toastify/dist/ReactToastify.css";
 import { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
-
-import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
-
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { BASE_URL } from "../Constants.js";
+import wallpaper from "../assets/4k_crm_wallpaper.jpg";
+import "./Auth.css";
+
 const Auth = () => {
     const [showSignUP, setSignUp] = useState(false);
     const [errorMessage, seterrorMessage] = useState("");
+    const [isProcessing, setIsProcessing] = useState(false);
+
     const navigate = useNavigate();
+
     const initialLoginFormValues = {
         userId: "",
         password: "",
@@ -32,6 +36,7 @@ const Auth = () => {
     const handleLogin = async (event) => {
         event.preventDefault();
         try {
+            setIsProcessing(true);
             const { data } = await axios.post(
                 BASE_URL + "/crm/api/v1/auth/signin",
                 {
@@ -46,7 +51,7 @@ const Auth = () => {
             localStorage.setItem("userStatus", data.userStatus);
             localStorage.setItem("token", data.accessToken);
 
-            switch (data.userTypes) {
+            switch (data.userType) {
                 case "CUSTOMER":
                     navigate("/customer");
                     break;
@@ -62,11 +67,15 @@ const Auth = () => {
         } catch (ex) {
             toast.error(ex.response.data.message);
             seterrorMessage(ex.response.data.message);
+        } finally {
+            setIsProcessing(false);
         }
     };
+
     async function handleSignUp(event) {
         event.preventDefault();
         try {
+            setIsProcessing(true);
             await axios.post(BASE_URL + "/crm/api/v1/auth/signup", {
                 userId: SignUpFormValues.userId,
                 password: SignUpFormValues.password,
@@ -79,6 +88,8 @@ const Auth = () => {
         } catch (ex) {
             toast.error(ex.response.data.message);
             seterrorMessage(ex.response.data.message);
+        } finally {
+            setIsProcessing(false);
         }
     }
 
@@ -117,13 +128,19 @@ const Auth = () => {
 
     return (
         <div id="login-page">
-            <div className="bg-primary  d-flex justify-content-center align-item-center vh-100">
-                <div className="card m-auto p-3">
+            <div
+                className="loginContainer d-flex justify-content-center align-item-center vh-100"
+                style={{
+                    background: `url(${wallpaper}) center/cover no-repeat`,
+                }}>
+                <div className="loginCard m-auto p-3">
                     <div className="row m-2">
                         <div className="col">
                             {!showSignUP ? (
                                 <div>
-                                    <h4 className="text-center">
+                                    <h4
+                                        className="text-center"
+                                        style={{ color: "white" }}>
                                         Login to ClientFlow
                                     </h4>
                                     <form onSubmit={handleLogin}>
@@ -132,7 +149,7 @@ const Auth = () => {
                                                 type="text"
                                                 name="userId"
                                                 placeholder="Enter your user id"
-                                                className="form-control"
+                                                className="textField form-control"
                                                 value={LoginFormValues.userId}
                                                 onChange={handleLoginFromChange}
                                                 required
@@ -143,7 +160,7 @@ const Auth = () => {
                                                 type="password"
                                                 name="password"
                                                 placeholder="Enter your password"
-                                                className="form-control"
+                                                className="textField form-control"
                                                 onChange={handleLoginFromChange}
                                                 value={LoginFormValues.password}
                                                 required
@@ -152,24 +169,17 @@ const Auth = () => {
                                         <div className="input-group m-1 mt-2">
                                             <input
                                                 type="submit"
-                                                className="form-control btn btn-primary"
-                                                value="login"
+                                                className="submitBtn form-control btn btn-primary"
+                                                value={
+                                                    isProcessing
+                                                        ? "Logging in..."
+                                                        : "Login"
+                                                }
+                                                disabled={isProcessing}
                                             />
                                         </div>
                                         <div
-                                            className="signup-btn text-right"
-                                            style={{
-                                                cursor: "pointer",
-                                                textDecoration: "none",
-                                            }}
-                                            onMouseEnter={(event) =>
-                                                (event.target.style.textDecoration =
-                                                    "underline")
-                                            }
-                                            onMouseLeave={(event) =>
-                                                (event.target.style.textDecoration =
-                                                    "none")
-                                            }
+                                            className="signupPrompt signup-btn text-right"
                                             onClick={toggleSignUp}>
                                             Don't have an account? SignUp
                                         </div>
@@ -177,7 +187,9 @@ const Auth = () => {
                                 </div>
                             ) : (
                                 <div>
-                                    <h4 className="text-center">
+                                    <h4
+                                        className="text-center"
+                                        style={{ color: "white" }}>
                                         Sign-up for ClientFlow
                                     </h4>
                                     <form onSubmit={handleSignUp}>
@@ -186,7 +198,7 @@ const Auth = () => {
                                                 type="text"
                                                 name="userId"
                                                 placeholder="Enter a user id"
-                                                className="form-control"
+                                                className="textField form-control"
                                                 onChange={
                                                     handleSignUpFormChange
                                                 }
@@ -199,7 +211,7 @@ const Auth = () => {
                                                 type="username"
                                                 name="Username"
                                                 placeholder="Enter a username"
-                                                className="form-control"
+                                                className="textField form-control"
                                                 onChange={
                                                     handleSignUpFormChange
                                                 }
@@ -211,6 +223,7 @@ const Auth = () => {
                                         </div>
                                         <div className="input-group m-1 mt-2">
                                             <Form.Select
+                                                className="textField"
                                                 aria-label="user Type selection"
                                                 value={
                                                     SignUpFormValues.userTypes
@@ -219,13 +232,22 @@ const Auth = () => {
                                                 onChange={
                                                     handleSignUpFormChange
                                                 }>
-                                                <option value="CUSTOMER">
+                                                <option disabled value="">
+                                                    Select a user type
+                                                </option>
+                                                <option
+                                                    className="listOption"
+                                                    value="CUSTOMER">
                                                     CUSTOMER
                                                 </option>
-                                                <option value="ENGINEER">
+                                                <option
+                                                    className="listOption"
+                                                    value="ENGINEER">
                                                     ENGINEER
                                                 </option>
-                                                <option value="ADMIN">
+                                                <option
+                                                    className="listOption"
+                                                    value="ADMIN">
                                                     ADMIN
                                                 </option>
                                             </Form.Select>
@@ -234,7 +256,7 @@ const Auth = () => {
                                             <input
                                                 type="email"
                                                 name="email"
-                                                className="form-control"
+                                                className="textField form-control"
                                                 value={SignUpFormValues.email}
                                                 onChange={
                                                     handleSignUpFormChange
@@ -246,7 +268,7 @@ const Auth = () => {
                                             <input
                                                 type="password"
                                                 name="password"
-                                                className="form-control"
+                                                className="textField form-control"
                                                 value={
                                                     SignUpFormValues.password
                                                 }
@@ -257,28 +279,21 @@ const Auth = () => {
                                                 required
                                             />
                                         </div>
-                                        <div className="input-group m-2 mt-2 width-100px">
+                                        <div className="input-group m-1 mt-2 width-100px">
                                             <input
                                                 type="submit"
-                                                className="form-control btn btn-primary"
-                                                value="Signup"
+                                                className="submitBtn form-control btn btn-primary"
+                                                value={
+                                                    isProcessing
+                                                        ? "Signing up..."
+                                                        : "Signup"
+                                                }
+                                                disabled={isProcessing}
                                             />
                                         </div>
 
                                         <div
-                                            className="signup-btn text-right"
-                                            style={{
-                                                cursor: "pointer",
-                                                textDecoration: "none",
-                                            }}
-                                            onMouseEnter={(event) =>
-                                                (event.target.style.textDecoration =
-                                                    "underline")
-                                            }
-                                            onMouseLeave={(event) =>
-                                                (event.target.style.textDecoration =
-                                                    "none")
-                                            }
+                                            className="loginPrompt signup-btn text-right"
                                             onClick={toggleSignUp}>
                                             Already have an account? Login
                                         </div>
