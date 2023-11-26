@@ -58,7 +58,7 @@ const Admin = () => {
                 }
             );
 
-            toast.success("User detail updated successfully");
+            toast.success("User details updated successfully!");
 
             setUsersList(
                 userList.map((user) =>
@@ -67,6 +67,7 @@ const Admin = () => {
             );
             setShowUserModal(false);
         } catch (ex) {
+            console.error("Error updating user details:", ex.response);
             toast.error(
                 "Error occured while updating user details. Please try again in a minute."
             );
