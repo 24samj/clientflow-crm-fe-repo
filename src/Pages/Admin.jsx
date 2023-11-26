@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
-
 import axios from "axios";
 import MaterialTable from "@material-table/core";
-
 import { Button, Form, Modal, ModalBody, ModalFooter } from "react-bootstrap";
 import Sidebar from "../Component/SideBar.jsx";
 import Loader from "../Component/Loader.jsx";
@@ -18,9 +16,10 @@ const Admin = () => {
     const [showUserModal, setShowUserModal] = useState(false);
     const [userDetail, setUserDetail] = useState({});
     const [ticketList, setTicketList] = useState([]);
+
     useAuth();
 
-    const FetchUsers = async () => {
+    const fetchUsers = async () => {
         try {
             setIsUserslistLoading(true);
             const { data } = await axios.get(BASE_URL + "/crm/api/v1/users/");
@@ -34,10 +33,7 @@ const Admin = () => {
 
     const fetchTickets = async () => {
         try {
-            const { data } = await axios.get(
-                `${BASE_URL}/crm/api/v1/tickets/all`
-            );
-            console.log(data);
+            const { data } = await axios.get(`${BASE_URL}/crm/api/v1/tickets`);
             setTicketList(data);
         } catch (ex) {
             toast.error("Error occured while fetching the ticket counts.");
@@ -91,7 +87,8 @@ const Admin = () => {
         });
     };
     useEffect(() => {
-        FetchUsers();
+        fetchUsers();
+        fetchTickets();
     }, []);
 
     return (

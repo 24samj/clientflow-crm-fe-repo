@@ -1,9 +1,9 @@
+import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { BASE_URL } from "../Constants.js";
 import wallpaper from "../assets/4k_crm_wallpaper.jpg";
 import "./Auth.css";

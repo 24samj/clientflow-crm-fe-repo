@@ -11,11 +11,7 @@ import {
 } from "react-bootstrap";
 import { BASE_URL } from "../Constants.js";
 import Sidebar from "../Component/SideBar.jsx";
-//import StatusCard from "../components/StatusCard.jsx";
-//import Loader from "../components/Loader";
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-//import StatusCard from "../Component/StatusCard";
 import Loader from "../Component/Loader.jsx";
 import StatusRow from "../Component/StatusRow.jsx";
 import UpdateTicketDetail from "../Component/UpdateTicketModal.jsx";
@@ -26,73 +22,35 @@ import WelcomeMsg from "../Component/WelcomeMsg.jsx";
 const Customer = () => {
     const [showCreateTicketModal, setShowCreateTicketModal] = useState(false);
     const [ticketCreationData, setTicketCreationData] = useState({});
-
-    const [isLoading, ticketList, setTicketList] = useTickets();
+    const [isLoading, ticketList, setTicketList, fetchTickets] = useTickets();
     const [showModal, setShowModal] = useState(false);
     const [ticketDetail, setTicketDetail] = useState({});
-    //const navigate = useNavigate();
+
     useAuth();
 
     const closeCreateTicketModal = () => setShowCreateTicketModal(false);
-
-    // const fetchTickets = async () => {
-    //   try {
-    //     setIsAssignedTicketsLoading(true);
-    //     const { data } = await axios.get(`${BASE_URL}/crm/api/v1/tickets`, {
-    //       headers: {
-    //         "x-access-token": localStorage.getItem("token"),
-    //       },
-    //     });
-    //     setTicketList(data);
-    //   } catch (ex) {
-    //     toast.error("Error occured while fetching the list of tickets.");
-    //   } finally {
-    //     setIsAssignedTicketsLoading(false);
-    //   }
-    // };
 
     const createTicket = async (event) => {
         event.preventDefault();
         const data = {
             title: ticketCreationData.title,
             description: ticketCreationData.description,
+            reporter: localStorage.getItem("userid"),
         };
 
         try {
             await axios.post(`${BASE_URL}/crm/api/v1/tickets`, data);
 
             toast.success("Created a new ticket!");
+
             setShowCreateTicketModal(false);
             setTicketCreationData({});
         } catch (ex) {
             toast.error("Error while creating a new ticket!");
+        } finally {
+            fetchTickets();
         }
     };
-
-    // const updateTicketDetail = async (event) => {
-    //   event.preventDefault();
-    //   try {
-    //     const { data } = await axios.put(
-    //       `${BASE_URL}/crm/api/v1/tickets/${ticketDetail.id}`,
-    //       ticketDetail,
-    //       {
-    //         headers: {
-    //           "x-access-token": localStorage.getItem("token"),
-    //         },
-    //       }
-    //     );
-
-    //     setShowEngineerModal(false);
-    //     toast.success("Successfully updated the ticket details.");
-    //     setTicketList(
-    //       ticketList.map((ticket) =>
-    //         ticket.id === ticketDetail.id ? data : ticket
-    //       )
-    //     );
-    //   } catch (ex) {
-    //     toast.error("Error while updating the ticket details.");
-    //   }
-    // };
 
     const handleRowClick = (event, rowData) => {
         setShowModal(true);
@@ -106,24 +64,11 @@ const Customer = () => {
     };
 
     const handleTicketCreateFormChange = (event) => {
-        console.log(event);
         setTicketCreationData({
             ...ticketCreationData,
             [event.target.name]: event.target.value,
         });
     };
-
-    // useEffect(() => {
-    //   if (localStorage.getItem("token")) {
-    //     fetchTickets();
-    //   }
-    // }, []);
-
-    // useEffect(() => {
-    //   if (!localStorage.getItem("token")) {
-    //     navigate("/");
-    //   }
-    // }, []);
 
     return (
         <>
