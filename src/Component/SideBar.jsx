@@ -1,6 +1,7 @@
 import { CNavItem, CNavTitle, CSidebar, CSidebarNav } from "@coreui/react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import crmLogo from "../assets/crm_logo.png";
 
 const Sidebar = () => {
     const navigate = useNavigate();
@@ -12,8 +13,14 @@ const Sidebar = () => {
     return (
         <CSidebar style={{ height: "100vh" }}>
             <CSidebarNav>
-                <CNavItem href="#" className="bg-dark">
-                    <i className="bi bi-bar-chart-fill text-white m-2"></i>
+                <CNavItem
+                    href="#"
+                    className="bg-dark d-flex justify-content-center">
+                    <img
+                        src={crmLogo}
+                        alt="clientflow logo"
+                        style={{ height: "50px" }}
+                    />
                     <h5 className="text-white mx-3 my-1 fw-bolder">
                         ClientFlow CRM
                     </h5>
