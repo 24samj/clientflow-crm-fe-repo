@@ -21,7 +21,7 @@ const Sidebar = () => {
                         alt="clientflow logo"
                         style={{ height: "50px" }}
                     />
-                    <h5 className="text-white mx-3 my-1 fw-bolder">
+                    <h5 className="text-white mx-2 my-1 fw-bolder">
                         ClientFlow CRM
                     </h5>
                 </CNavItem>
