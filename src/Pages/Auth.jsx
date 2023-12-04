@@ -6,12 +6,14 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../Constants.js";
 import wallpaper from "../assets/4k_crm_wallpaper.jpg";
+import textLogo from "../assets/logo-cropped.png";
 import "./Auth.css";
 
 const Auth = () => {
-    const [showSignUP, setSignUp] = useState(false);
     const [errorMessage, seterrorMessage] = useState("");
     const [isProcessing, setIsProcessing] = useState(false);
+    const [isLoginFormClicked, setIsLoginFormClicked] = useState(false);
+    const [isSignupFormClicked, setIsSignupFormClicked] = useState(false);
 
     const navigate = useNavigate();
 
@@ -90,12 +92,20 @@ const Auth = () => {
             seterrorMessage(ex.response.data.message);
         } finally {
             setIsProcessing(false);
+            toggleForms("login");
         }
     }
 
-    const toggleSignUp = () => {
-        setSignUp(!showSignUP);
+    const toggleForms = (formType) => {
+        if (formType === "login") {
+            setIsLoginFormClicked(true);
+            setIsSignupFormClicked(false);
+        } else if (formType === "signup") {
+            setIsSignupFormClicked(true);
+            setIsLoginFormClicked(false);
+        }
     };
+
     function handleLoginFromChange(event) {
         setLoginFormValues({
             ...LoginFormValues,
@@ -133,175 +143,163 @@ const Auth = () => {
                 style={{
                     background: `url(${wallpaper}) center/cover no-repeat`,
                 }}>
-                <div className="loginCard m-auto p-3">
+                <div
+                    className="loginIntro m-auto w-3 p-3"
+                    // style={
+                    //     isLoginFormClicked
+                    //         ? { transform: "translate(50%)" }
+                    //         : isSignupFormClicked
+                    //         ? { transform: "translate(-50%)" }
+                    //         : {}
+                    // }
+                >
                     <div className="row m-2">
-                        <div className="col">
-                            {!showSignUP ? (
-                                <div>
-                                    <h4
-                                        className="text-center"
-                                        style={{ color: "white" }}>
-                                        Login to ClientFlow
-                                    </h4>
-                                    <form onSubmit={handleLogin}>
-                                        <div className="input-group m-1 mt-4">
-                                            <input
-                                                type="text"
-                                                name="userId"
-                                                placeholder="Enter your user id"
-                                                className="textField form-control"
-                                                value={LoginFormValues.userId}
-                                                onChange={handleLoginFromChange}
-                                                required
-                                            />
-                                        </div>
-                                        <div className="input-group m-1 mt-2">
-                                            <input
-                                                type="password"
-                                                name="password"
-                                                placeholder="Enter your password"
-                                                className="textField form-control"
-                                                onChange={handleLoginFromChange}
-                                                value={LoginFormValues.password}
-                                                required
-                                            />
-                                        </div>
-                                        <div className="input-group m-1 mt-2">
-                                            <input
-                                                type="submit"
-                                                className="submitBtn form-control btn btn-primary"
-                                                value={
-                                                    isProcessing
-                                                        ? "Logging in..."
-                                                        : "Login"
-                                                }
-                                                disabled={isProcessing}
-                                            />
-                                        </div>
-                                        <div
-                                            className="signupPrompt signup-btn text-right"
-                                            onClick={toggleSignUp}>
-                                            Don't have an account? SignUp
-                                        </div>
-                                    </form>
-                                </div>
-                            ) : (
-                                <div>
-                                    <h4
-                                        className="text-center"
-                                        style={{ color: "white" }}>
-                                        Sign-up for ClientFlow
-                                    </h4>
-                                    <form onSubmit={handleSignUp}>
-                                        <div className="input-group m-1 mt-4">
-                                            <input
-                                                type="text"
-                                                name="userId"
-                                                placeholder="Enter a user id"
-                                                className="textField form-control"
-                                                onChange={
-                                                    handleSignUpFormChange
-                                                }
-                                                value={SignUpFormValues.userId}
-                                                required
-                                            />
-                                        </div>
-                                        <div className="input-group m-1 mt-2">
-                                            <input
-                                                type="username"
-                                                name="Username"
-                                                placeholder="Enter a username"
-                                                className="textField form-control"
-                                                onChange={
-                                                    handleSignUpFormChange
-                                                }
-                                                value={
-                                                    SignUpFormValues.Username
-                                                }
-                                                required
-                                            />
-                                        </div>
-                                        <div className="input-group m-1 mt-2">
-                                            <Form.Select
-                                                className="textField"
-                                                aria-label="user Type selection"
-                                                value={
-                                                    SignUpFormValues.userTypes
-                                                }
-                                                name="userTypes"
-                                                onChange={
-                                                    handleSignUpFormChange
-                                                }>
-                                                <option disabled value="">
-                                                    Select a user type
-                                                </option>
-                                                <option
-                                                    className="listOption"
-                                                    value="CUSTOMER">
-                                                    CUSTOMER
-                                                </option>
-                                                <option
-                                                    className="listOption"
-                                                    value="ENGINEER">
-                                                    ENGINEER
-                                                </option>
-                                                <option
-                                                    className="listOption"
-                                                    value="ADMIN">
-                                                    ADMIN
-                                                </option>
-                                            </Form.Select>
-                                        </div>
-                                        <div className="input-group m-1 mt-2">
-                                            <input
-                                                type="email"
-                                                name="email"
-                                                className="textField form-control"
-                                                value={SignUpFormValues.email}
-                                                onChange={
-                                                    handleSignUpFormChange
-                                                }
-                                                placeholder="Enter an email"
-                                            />
-                                        </div>
-                                        <div className="input-group m-1 mt-2">
-                                            <input
-                                                type="password"
-                                                name="password"
-                                                className="textField form-control"
-                                                value={
-                                                    SignUpFormValues.password
-                                                }
-                                                placeholder="Enter a password"
-                                                onChange={
-                                                    handleSignUpFormChange
-                                                }
-                                                required
-                                            />
-                                        </div>
-                                        <div className="input-group m-1 mt-2 width-100px">
-                                            <input
-                                                type="submit"
-                                                className="submitBtn form-control btn btn-primary"
-                                                value={
-                                                    isProcessing
-                                                        ? "Signing up..."
-                                                        : "Signup"
-                                                }
-                                                disabled={isProcessing}
-                                            />
-                                        </div>
+                        <div className="col text-light fs-2">Welcome to</div>
+                        <img src={textLogo} alt="site text logo" />
 
-                                        <div
-                                            className="loginPrompt signup-btn text-right"
-                                            onClick={toggleSignUp}>
-                                            Already have an account? Login
-                                        </div>
-                                    </form>
-                                </div>
-                            )}
-                        </div>
+                        <button
+                            className="formToggleBtn btn btn-primary mt-3"
+                            onClick={() => toggleForms("login")}
+                            disabled={isLoginFormClicked || isProcessing}>
+                            Login
+                        </button>
+                        <button
+                            className="formToggleBtn btn btn-primary mt-3"
+                            onClick={() => toggleForms("signup")}
+                            disabled={isSignupFormClicked || isProcessing}>
+                            Signup
+                        </button>
                     </div>
+                </div>
+                <div
+                    className="loginForm"
+                    style={
+                        isLoginFormClicked
+                            ? { transform: "translateX(0%)" }
+                            : {}
+                    }>
+                    <h4 className="text-center" style={{ color: "white" }}>
+                        Login
+                    </h4>
+                    <form onSubmit={handleLogin} className="m-5">
+                        <div className="input-group">
+                            <input
+                                type="text"
+                                name="userId"
+                                placeholder="Enter your user id"
+                                className="textField form-control"
+                                value={LoginFormValues.userId}
+                                onChange={handleLoginFromChange}
+                                required
+                            />
+                        </div>
+                        <div className="input-group mt-2">
+                            <input
+                                type="password"
+                                name="password"
+                                placeholder="Enter your password"
+                                className="textField form-control"
+                                onChange={handleLoginFromChange}
+                                value={LoginFormValues.password}
+                                required
+                            />
+                        </div>
+                        <div className="input-group mt-2">
+                            <input
+                                type="submit"
+                                className="submitBtn form-control btn btn-primary"
+                                value={isProcessing ? "Logging in..." : "Login"}
+                                disabled={isProcessing}
+                            />
+                        </div>
+                    </form>
+                </div>
+                <div
+                    className="signupForm"
+                    style={
+                        isSignupFormClicked
+                            ? { transform: "translateX(0%)" }
+                            : {}
+                    }>
+                    <h4 className="text-center" style={{ color: "white" }}>
+                        Sign-up
+                    </h4>
+                    <form onSubmit={handleSignUp} className="m-5">
+                        <div className="input-group">
+                            <input
+                                type="text"
+                                name="userId"
+                                placeholder="Enter a user id"
+                                className="textField form-control"
+                                onChange={handleSignUpFormChange}
+                                value={SignUpFormValues.userId}
+                                required
+                            />
+                        </div>
+                        <div className="input-group mt-2">
+                            <input
+                                type="username"
+                                name="Username"
+                                placeholder="Enter a username"
+                                className="textField form-control"
+                                onChange={handleSignUpFormChange}
+                                value={SignUpFormValues.Username}
+                                required
+                            />
+                        </div>
+                        <div className="input-group mt-2">
+                            <Form.Select
+                                className="textField"
+                                aria-label="user Type selection"
+                                value={SignUpFormValues.userTypes}
+                                name="userTypes"
+                                onChange={handleSignUpFormChange}>
+                                <option disabled value="">
+                                    Select a user type
+                                </option>
+                                <option className="listOption" value="CUSTOMER">
+                                    CUSTOMER
+                                </option>
+                                <option className="listOption" value="ENGINEER">
+                                    ENGINEER
+                                </option>
+                                <option className="listOption" value="ADMIN">
+                                    ADMIN
+                                </option>
+                            </Form.Select>
+                        </div>
+                        <div className="input-group mt-2">
+                            <input
+                                type="email"
+                                name="email"
+                                className="textField form-control"
+                                value={SignUpFormValues.email}
+                                onChange={handleSignUpFormChange}
+                                placeholder="Enter an email"
+                            />
+                        </div>
+                        <div className="input-group mt-2">
+                            <input
+                                type="password"
+                                name="password"
+                                className="textField form-control"
+                                value={SignUpFormValues.password}
+                                placeholder="Enter a password"
+                                onChange={handleSignUpFormChange}
+                                required
+                            />
+                        </div>
+                        <div className="input-group mt-2 width-100px">
+                            <input
+                                type="submit"
+                                className="submitBtn form-control btn btn-primary"
+                                value={
+                                    isProcessing ? "Signing up..." : "Signup"
+                                }
+                                disabled={isProcessing}
+                            />
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
