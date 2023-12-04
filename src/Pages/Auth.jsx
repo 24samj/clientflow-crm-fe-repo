@@ -85,7 +85,6 @@ const Auth = () => {
                 email: SignUpFormValues.email,
                 userTypes: SignUpFormValues.userTypes,
             });
-            window.location.reload();
             toast.success("Sign-up successful please login to continue");
         } catch (ex) {
             toast.error(ex.response.data.message);
