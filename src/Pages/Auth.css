@@ -53,6 +53,7 @@
 
 .loginForm,
 .signupForm {
+    display: none;
     position: absolute;
     transition: 0.5s;
     height: 100vh;
@@ -74,6 +75,6 @@
 }
 
 .signupForm {
-    right: 0;
-    transform: translateX(100%);
+    left: 0;
+    transform: translateX(-100%);
 }
